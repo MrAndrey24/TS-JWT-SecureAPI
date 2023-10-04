@@ -17,7 +17,7 @@ model User {
   photo    String?
   email    String  @unique
   password String
-  task     Task[]
+  tasks    Task[]
 }
 
 model Task {
