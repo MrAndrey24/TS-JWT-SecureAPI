@@ -3,6 +3,19 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
+export async function getUsers(){
+    try{
+        const users = await prisma.user.findMany({
+            include: {
+                tasks: true
+            }
+        })
+        return users
+    }catch(err){
+        throw err
+    }
+}
+
 export async function createUser(user: User){
     try{
         const newUser = await prisma.user.create({
