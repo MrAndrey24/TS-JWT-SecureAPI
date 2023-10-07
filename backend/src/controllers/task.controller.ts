@@ -1,8 +1,8 @@
 import { Task } from '../models/task';
-import { createTask, updateTask, deleteTask } from '../services/taskServices';
-import express from 'express';
+import { createTask, updateTask, deleteTask } from '../services/task.services';
+import { Request, Response } from 'express';
 
-export async function createTaskController(req: express.Request, res: express.Response){
+export async function createTaskController(req: Request, res: Response){
     try{
         const { title, description, status, userId } = req.body
         const task: Task = {
@@ -18,7 +18,7 @@ export async function createTaskController(req: express.Request, res: express.Re
     }
 }
 
-export async function updateTaskController(req: express.Request, res: express.Response){
+export async function updateTaskController(req: Request, res: Response){
     try{
         const { id } = req.params;
         const { title, description, status, userId } = req.body
@@ -35,7 +35,7 @@ export async function updateTaskController(req: express.Request, res: express.Re
     }
 }
 
-export async function deleteTaskController(req: express.Request, res: express.Response){
+export async function deleteTaskController(req: Request, res: Response){
     try{
         const { id } = req.params;
         const deletedTask = await deleteTask(parseInt(id));

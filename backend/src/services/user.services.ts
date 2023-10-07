@@ -1,20 +1,8 @@
 import { User } from "../models/user";
 import { PrismaClient } from "@prisma/client"
+import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
-
-export async function getUsers(){
-    try{
-        const users = await prisma.user.findMany({
-            include: {
-                tasks: true
-            }
-        })
-        return users
-    }catch(err){
-        throw err
-    }
-}
 
 export async function createUser(user: User){
     try{
@@ -29,6 +17,34 @@ export async function createUser(user: User){
         })
 
         return newUser
+    }catch(err){
+        throw err
+    }
+}
+
+export async function findUser(email: string){
+    try{
+        const user = await prisma.user.findUnique({
+            where:{
+                email: email
+            }
+        })
+
+        return user
+    }catch(err){
+        throw err
+    }
+}
+
+export async function findUserById(id: number){
+    try{
+        const user = await prisma.user.findUnique({
+            where:{
+                id: id
+            }
+        })
+
+        return user
     }catch(err){
         throw err
     }
@@ -66,4 +82,20 @@ export async function deleteUser(id: number){
     }catch(err){
         throw err
     }
+}
+
+export async function encryptPassword(password: string){
+    const salt = await bcrypt.genSalt(10)
+    return bcrypt.hash(password, salt)
+}
+
+export async function validatePassword(password: string, email: string){
+    const user = await prisma.user.findUnique({
+        where:{
+            email: email
+        }
+    })
+    if(!user) return false
+    const passwordMatch = await bcrypt.compare(password, user.password)
+    return passwordMatch
 }
