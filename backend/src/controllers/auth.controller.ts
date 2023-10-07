@@ -6,20 +6,24 @@ import { createUser, encryptPassword, findUser, findUserById, validatePassword }
 export async function signup(req: Request, res: Response){
     try{
         const { name, lastName, photo, email, password } = req.body
-        const user: User = {
+        const newUser: User = {
             name,
             lastName,
             photo,
             email,
             password
         }
-        user.password = await encryptPassword(user.password)
-        const saveUser = await createUser(user)
 
-        const token = jwt.sign({_id: saveUser.id}, process.env.TOKEN_SECRET || 'tokentest')
+        newUser.password = await encryptPassword(newUser.password)
+        const saveUser = await createUser(newUser)
+
+        const token = jwt.sign({_id: saveUser.id}, process.env.TOKEN_SECRET || 'tokentest', {
+            expiresIn: 60 * 60 * 24
+        })
+
         res.header('auth-token', token).json(saveUser);
     }catch(err){
-        res.status(500).send(err);
+        res.status(400).send(err);
     }
 }
 
@@ -44,10 +48,11 @@ export async function signin(req: Request, res: Response){
 
 export async function profile(req: Request, res: Response){
     try{
-        const user = await findUserById(Number(req.userId))
-        if(!user) return res.status(404).json('User not found')
-        res.send(user)
+        const userId = parseInt(req.userId);
+        const user = await findUserById(userId);
+        if(!user) return res.status(404).json('User not found');
+        res.send(user);
     }catch(err){
-        res.status(500).send(err)
+        res.status(500).send(err);
     }
 }
