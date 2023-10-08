@@ -4,7 +4,7 @@ export interface Payload {
     exp: number;
 }
 
-export declare global {
+declare global {
     namespace Express {
         interface Request {
             userId: string;

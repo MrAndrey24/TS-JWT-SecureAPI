@@ -5,7 +5,7 @@ import { TokenValidation } from '../middleware/validate.token';
 const router = express.Router();
 
 
-router.put('/:id', TokenValidation ,updateUserController);
-router.delete('/:id', TokenValidation ,deleteUserController);
+router.put('/', TokenValidation ,updateUserController);
+router.delete('/', TokenValidation ,deleteUserController);
 
 export default router;

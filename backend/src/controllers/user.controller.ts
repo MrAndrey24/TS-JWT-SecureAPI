@@ -1,20 +1,13 @@
-import { User } from "../models/user";
 import { updateUser, deleteUser} from "../services/user.services";
 import { Request, Response } from 'express';
+import { toNewUser } from "../utils/utils";
 
 
 export async function updateUserController(req: Request, res: Response){
     try{
-        const { id } = req.params;
-        const { name, lastName, photo, email, password } = req.body
-        const user: User = {
-            name,
-            lastName,
-            photo,
-            email,
-            password
-        }
-        const updatedUser = await updateUser(parseInt(id), user)
+        const userId = parseInt(req.userId);
+        const user = toNewUser(req.body);
+        const updatedUser = await updateUser(userId, user)
         res.status(200).send(updatedUser);
     }catch(err: any){
         res.status(400).send(err.message)
@@ -23,8 +16,8 @@ export async function updateUserController(req: Request, res: Response){
 
 export async function deleteUserController(req: Request, res: Response){
     try{
-        const { id } = req.params;
-        const deletedUser = await deleteUser(parseInt(id));
+        const userId = parseInt(req.userId);
+        const deletedUser = await deleteUser(userId);
         res.status(200).send(deletedUser);
     }catch(err: any){
         res.status(400).send(err.message);

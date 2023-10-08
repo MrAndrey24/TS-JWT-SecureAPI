@@ -1,16 +1,10 @@
-import { Task } from '../models/task';
 import { createTask, updateTask, deleteTask } from '../services/task.services';
 import { Request, Response } from 'express';
+import { toNewTask } from '../utils/utils';
 
 export async function createTaskController(req: Request, res: Response){
     try{
-        const { title, description, status, userId } = req.body
-        const task: Task = {
-            title,
-            description,
-            status,
-            userId
-        }
+        const task = toNewTask(req.body);
         const newTask = await createTask(task);
         res.status(201).send(newTask);
     }catch(err){
@@ -21,13 +15,7 @@ export async function createTaskController(req: Request, res: Response){
 export async function updateTaskController(req: Request, res: Response){
     try{
         const { id } = req.params;
-        const { title, description, status, userId } = req.body
-        const task: Task = {
-            title,
-            description,
-            status,
-            userId
-        }
+        const task = toNewTask(req.body);
         const updatedTask = await updateTask(parseInt(id), task)
         res.status(200).send(updatedTask);
     }catch(err){

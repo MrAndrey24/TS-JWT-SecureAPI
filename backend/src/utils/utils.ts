@@ -86,36 +86,34 @@ const isStatus = (status: any): boolean => {
     return Object.values(Status).includes(status)
 }
 
-const isString = (string: any): boolean => {
+export const isString = (string: any): boolean => {
     return typeof string === 'string' || string instanceof String;
 }
 
-const isNumber = (number: any): boolean => {
+export const isNumber = (number: any): boolean => {
     return typeof number === 'number' || number instanceof Number;
 }
 
 
 
 // Functions to create new objects
-const toNewUser = (object: any): User => {
-    const newUser: User = {
+export const toNewUser = (object: any): User => {
+    const newUser = {
         name: parseName(object.name),
-        lastName: parseLastName(object.lastName),
-        photo: parsePhoto(object.photo),
+        lastName: parseLastName(object.lastName? object.lastName: ''),
+        photo: parsePhoto(object.photo? object.photo: ''),
         email: parseEmail(object.email),
         password: parsePassword(object.password),
     }
     return newUser
 }
 
-const toNewTask = (object: any): Task => {
-    const newTask: Task = {
+export const toNewTask = (object: any): Task => {
+    const newTask = {
         title: parseTitle(object.title),
-        description: parseDescription(object.description),
+        description: parseDescription(object.description? object.description: ''),
         status: parseStatus(object.status),
         userId: parseUserId(object.userId)
     }
     return newTask
 }
-
-export default { toNewUser, toNewTask }
