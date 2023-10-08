@@ -39,11 +39,12 @@ export async function updateTask(id: number, task: Task){
     }
 }
 
-export async function deleteTask(id: number){
+export async function deleteTask(id: number, userId: number){
     try{
         const deleteTask = await prisma.task.delete({
             where:{
-                id: id
+                id: id,
+                userId: userId
             }
         })
 

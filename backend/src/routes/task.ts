@@ -5,7 +5,7 @@ import { TokenValidation } from '../middleware/validate.token';
 const router = express.Router();
 
 router.post('/', TokenValidation ,createTaskController);
-router.put('/', updateTaskController);
-router.delete('/', deleteTaskController);
+router.put('/:id', TokenValidation ,updateTaskController);
+router.delete('/:id', TokenValidation ,deleteTaskController);
 
 export default router;
