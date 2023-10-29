@@ -11,3 +11,12 @@ With JWT in place, this API guarantees that specific users can access their data
 
 - Prisma ORM Integration
 The project utilizes Prisma ORM to create a sophisticated database. Prisma facilitates seamless execution of tailored queries, enhancing the efficiency and flexibility of the application.
+
+
+
+
+## Installing Modules:
+
+To install the necessary modules for the application, run the command `npm install` in the terminal.
+
+The application will run on `localhost:3000`.
