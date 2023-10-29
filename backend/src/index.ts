@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 import userRouter from './routes/user';
 import taskRouter from './routes/task';
 import AuthRouter from './routes/auth'
+import cors from 'cors';
 
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 dotenv.config();
 
