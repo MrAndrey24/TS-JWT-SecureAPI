@@ -1,13 +1,13 @@
-# Todo-app
+# TS-JWT-SecureAPI
 
-React and TypeScript To-Do List Project with Client-Server Architecture
+This project, TS-JWT-SecureAPI, serves as a testament to my proficiency in TypeScript. Through meticulous design and implementation, I have integrated JWT authentication into the backend, leveraging a robust Node structure.
 
-This project is a to-do list built with React and TypeScript, structured with a client-server architecture. The code is organized into separate folders for the client and the server, ensuring a clear separation of responsibilities.
+# Key Features
+- JWT Authentication
+JSON Web Token is employed to secure routes, allowing seamless user authentication. Each request is meticulously validated, ensuring access only to authenticated users.
 
-Key Features:
+- Data Security
+With JWT in place, this API guarantees that specific users can access their data securely. Robust verification processes are implemented, enabling efficient and safe retrieval of user-specific information.
 
-# JWT (JSON Web Token): 
-JSON Web Token is used to authenticate users and validate their permissions, ensuring they can use the application securely and efficiently.
-
-# Dockerization: 
-The application is containerized using Docker to create images and containers for long-term maintainability. This approach ensures straightforward and effective management of the environment, enhancing the application's portability and scalability.
+- Prisma ORM Integration
+The project utilizes Prisma ORM to create a sophisticated database. Prisma facilitates seamless execution of tailored queries, enhancing the efficiency and flexibility of the application.
